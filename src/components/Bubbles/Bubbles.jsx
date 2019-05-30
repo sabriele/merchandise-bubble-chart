@@ -45,7 +45,10 @@ export default class Bubbles extends React.Component {
       this.renderBubbles(nextProps.data);
     }
     if (nextProps.groupByStall !== this.props.groupByStall) {
-      this.regroupBubbles(nextProps.groupByStall);
+      this.regroupBubbles(nextProps);
+    }
+    if (nextProps.groupByLocation !== this.props.groupByLocation) {
+      this.regroupBubbles(nextProps);
     }
   }
 
@@ -70,9 +73,9 @@ export default class Bubbles extends React.Component {
     return -this.props.forceStrength * d.radius ** 2.0;
   }
 
-  regroupBubbles = groupByStall => {
-    const { forceStrength, stallCenters, center } = this.props;
-    if (groupByStall) {
+  regroupBubbles = selection => {
+    const { forceStrength, stallCenters, locationCenters, center } = this.props;
+    if (selection.groupByStall) {
       this.simulation
         .force(
           'x',
@@ -87,6 +90,22 @@ export default class Bubbles extends React.Component {
             .forceY()
             .strength(forceStrength)
             .y(d => stallCenters[d.stall].y)
+        );
+    } else if (selection.groupByLocation) {
+      this.simulation
+        .force(
+          'x',
+          d3
+            .forceX()
+            .strength(forceStrength)
+            .x(d => locationCenters[d.location].x)
+        )
+        .force(
+          'y',
+          d3
+            .forceY()
+            .strength(forceStrength)
+            .y(d => locationCenters[d.location].y)
         );
     } else {
       this.simulation

@@ -9,3 +9,9 @@ export const stallCenters = {
   'Stall C': { x: (3 / 5) * width, y: height / 2 },
   'Stall D': { x: (4 / 5) * width, y: height / 2 },
 };
+
+export const locationCenters = {
+  Jurong: { x: (1 / 4) * width, y: height / 2 },
+  Orchard: { x: (2 / 4) * width, y: height / 2 },
+  'Bt Merah': { x: (3 / 4) * width, y: height / 2 },
+};

@@ -4,9 +4,16 @@ import './App.css';
 import BubbleChart from './components/BubbleChart/BubbleChart';
 import Bubbles from './components/Bubbles/Bubbles';
 import StallsTitles from './components/StallsTitles/StallsTitles';
+import LocationsTitles from './components/LocationsTitles/LocationsTitles';
 import GroupingPicker from './components/GroupingPicker/GroupingPicker';
 import { createNodes } from './tools/utils';
-import { width, height, center, stallCenters } from './tools/constants';
+import {
+  width,
+  height,
+  center,
+  stallCenters,
+  locationCenters,
+} from './tools/constants';
 
 export default class App extends React.Component {
   state = {
@@ -36,13 +43,18 @@ export default class App extends React.Component {
         <BubbleChart width={width} height={height}>
           <Bubbles
             data={data}
-            forceStrength={0.03}
+            forceStrength={0.04}
             center={center}
             stallCenters={stallCenters}
+            locationCenters={locationCenters}
             groupByStall={grouping === 'stall'}
+            groupByLocation={grouping === 'location'}
           />
           {grouping === 'stall' && (
             <StallsTitles width={width} stallCenters={stallCenters} />
+          )}
+          {grouping === 'location' && (
+            <LocationsTitles width={width} locationCenters={locationCenters} />
           )}
         </BubbleChart>
       </div>
