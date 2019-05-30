@@ -158,7 +158,7 @@ export default class Bubbles extends React.Component {
   }
 
   render() {
-    return <g ref={this.onRef} className="bubbles" />;
+    return <g ref={this.onRef} />;
   }
 }
 
